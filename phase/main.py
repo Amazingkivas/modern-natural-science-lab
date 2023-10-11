@@ -49,7 +49,7 @@ def plotonPlane(rhs, limits):
 
     eps = 0.001
 
-    eigen = np.linalg.eig(matrix(0.))  # -((-2.0)**6)/6.0 + (5.0*(-2.0)**4)/4.0 - 2.0*(-2.0)**2.0 + 1.0)
+    eigen = np.linalg.eig(matrix(0.))
     #print(eigen)
     sol = solve_ivp(rhs, [1., 100.], [eps * eigen[1][0][0], eps * eigen[1][0][1]],
                     method='RK45',
@@ -63,10 +63,7 @@ def plotonPlane(rhs, limits):
                     atol=1e-10)
     x, y = sol.y
     plt.plot(x, y, 'r-')
-
-    eigen = np.linalg.eig(matrix(0.))  # -((-2.0)**6)/6.0 + (5.0*(-2.0)**4)/4.0 - 2.0*(-2.0)**2.0 + 1.0)
-    #print(eigen)
-
+    
     sol = solve_ivp(rhs, [1., 100.], [2., eps], method='RK45', rtol=1e-12, atol=1e-10)
     x, y = sol.y
     plt.plot(x, y, 'r-')
