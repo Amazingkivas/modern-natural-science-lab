@@ -1,8 +1,3 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
@@ -32,9 +27,9 @@ def func():
 
 
 def matrix(x):
-    px = 0.0
+    px = 0.0  # 
     py = 1.0
-    qx = x ** 5 - 5.0 * x ** 3 + 4.0 * x  # 5.0 * x ** 4 - 15.0 * x ** 2 + 4.0
+    qx = 5.0 * x ** 4 - 15.0 * x ** 2 + 4.0
     qy = 0.0
     return [[px, py], [qx, qy]]
 
@@ -49,38 +44,53 @@ def plotonPlane(rhs, limits):
 
     eps = 0.001
 
-    eigen = np.linalg.eig(matrix(0.))  # -((-2.0)**6)/6.0 + (5.0*(-2.0)**4)/4.0 - 2.0*(-2.0)**2.0 + 1.0)
-    #print(eigen)
-    sol = solve_ivp(rhs, [1., 100.], [eps * eigen[1][0][0], eps * eigen[1][0][1]],
-                    method='RK45',
-                    rtol=1e-12,
-                    atol=1e-10)
+    eigen = np.linalg.eig(matrix(0.))
+    # print(eigen)
+    sol = solve_ivp(rhs, [1, 9.7], [eps * eigen[1][1][1], eps * eigen[1][1][1]], method='RK45', rtol=1e-12, atol=1e-10)
     x, y = sol.y
     plt.plot(x, y, 'r-')
-    sol = solve_ivp(rhs, [1., 100.], [eps * -eigen[1][0][0], eps * -eigen[1][0][1]],
-                    method='RK45',
-                    rtol=1e-12,
+    sol = solve_ivp(rhs, [1, 9.7], [-eps * eigen[1][1][1], -eps * eigen[1][1][1]], method='RK45', rtol=1e-12,
                     atol=1e-10)
     x, y = sol.y
     plt.plot(x, y, 'r-')
 
-    eigen = np.linalg.eig(matrix(0.))  # -((-2.0)**6)/6.0 + (5.0*(-2.0)**4)/4.0 - 2.0*(-2.0)**2.0 + 1.0)
-    #print(eigen)
+    eigen = np.linalg.eig(matrix(2.))
+    # print(eigen)
+    sol = solve_ivp(rhs, [1, 10.], [2. + eps * eigen[1][1][0], eps * eigen[1][1][0]], method='RK45', rtol=1e-12,
+                    atol=1e-10)
+    x, y = sol.y
+    plt.plot(x, y, 'r-')
+    sol = solve_ivp(rhs, [10., 1], [2. + eps * eigen[1][1][1], -eps * eigen[1][1][1]], method='RK45', rtol=1e-12,
+                    atol=1e-10)
+    x, y = sol.y
+    plt.plot(x, y, 'r-')
+    sol = solve_ivp(rhs, [1, 5.], [2. - eps * eigen[1][1][1], -eps * eigen[1][1][1]], method='RK45', rtol=1e-12,
+                    atol=1e-10)
+    x, y = sol.y
+    plt.plot(x, y, 'r-')
+    sol = solve_ivp(rhs, [5., 1], [2. - eps * eigen[1][1][1], eps * eigen[1][1][1]], method='RK45', rtol=1e-12,
+                    atol=1e-10)
+    x, y = sol.y
+    plt.plot(x, y, 'r-')
 
-    sol = solve_ivp(rhs, [1., 100.], [2., eps], method='RK45', rtol=1e-12, atol=1e-10)
+    eigen = np.linalg.eig(matrix(2.))
+    # print(eigen)
+    sol = solve_ivp(rhs, [1, 5.], [-2. + eps * eigen[1][1][0], eps * eigen[1][1][0]], method='RK45', rtol=1e-12,
+                    atol=1e-10)
     x, y = sol.y
     plt.plot(x, y, 'r-')
-    sol = solve_ivp(rhs, [100., 1.], [2., eps], method='RK45', rtol=1e-12, atol=1e-10)
+    sol = solve_ivp(rhs, [5., 1], [-2. + eps * eigen[1][1][1], -eps * eigen[1][1][1]], method='RK45', rtol=1e-12,
+                    atol=1e-10)
     x, y = sol.y
     plt.plot(x, y, 'r-')
-    sol = solve_ivp(rhs, [1., 100.], [2., -eps], method='RK45', rtol=1e-12, atol=1e-10)
+    sol = solve_ivp(rhs, [1, 10.], [-2. - eps * eigen[1][1][1], -eps * eigen[1][1][1]], method='RK45', rtol=1e-12,
+                    atol=1e-10)
     x, y = sol.y
     plt.plot(x, y, 'r-')
-    sol = solve_ivp(rhs, [100., 1.], [2., -eps], method='RK45', rtol=1e-12, atol=1e-10)
+    sol = solve_ivp(rhs, [10., 1], [-2. - eps * eigen[1][1][1], eps * eigen[1][1][1]], method='RK45', rtol=1e-12,
+                    atol=1e-10)
     x, y = sol.y
     plt.plot(x, y, 'r-')
 
 
-# np.linalg.eig(matrix(0., 1.))
-if __name__ == '__main__':
-    plotonPlane(func(), [(-2.5, 2.5), (-2.5, 2.5)])
+plotonPlane(func(), [(-2.7, 2.7), (-2.7, 2.7)])
