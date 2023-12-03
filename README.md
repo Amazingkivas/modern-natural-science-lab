@@ -1,4 +1,4 @@
-# phase-trajectories-lab
+# Modern natural science (labs)
 
 This repository contains python code for constructing **phase trajectories** of **conservative** and **dissipative** systems of differential equations using libraries:
 - matplotlib
