@@ -6,5 +6,3 @@ Required libraries:
 - numpy
 
 Implemented for a specific systems but it's easy to change.
-
-Link to the service for opening the **.ipynb** file and compiling python code: https://jupyter.org/try-jupyter/lab/index.html
